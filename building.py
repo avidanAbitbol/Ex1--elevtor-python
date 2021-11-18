@@ -1,9 +1,8 @@
 
 import json
 import sys
-
-from calls import Callas
-from elevators import Elevators
+from Calls import Calls
+from Elevators import Elevators
 
 
 class Building(object):
@@ -25,7 +24,7 @@ class Building(object):
                                max_floor=elev["_maxFloor"],
                                close_time=elev["_closeTime"], open_time=elev["_openTime"],
                                start_time=elev["_startTime"],
-                               stop_time=elev["_stopTime"], calls_for_elv=[], time_busy=[])
+                               stop_time=elev["_stopTime"], calls_for_elv=[], elevCalls=[])
                 elvator_list.append(el)
             self.elvators = elvator_list
 
