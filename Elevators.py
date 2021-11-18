@@ -1,10 +1,10 @@
-from calls import Callas
+from Calls import Calls
 import math
 
 
 class Elevators:
     def __init__(self, id, speed, min_floor, max_floor, close_time, open_time, start_time, stop_time,
-                 calls_for_elv, time_busy, position=0):
+                 calls_for_elv, elevCalls, position=0):
         self.id = id
         self.speed = speed
         self.min_floor = min_floor
@@ -14,7 +14,7 @@ class Elevators:
         self.start_time = start_time
         self.stop_time = stop_time
         self.calls_for_elv = calls_for_elv
-        self.time_busy = time_busy
+        self.elevCalls = elevCalls
         self.position = position
 
     def __repr__(self) -> str:
