@@ -1,3 +1,4 @@
+
 from Calls import *
 from Elevators import Elevators
 from Building import Building
@@ -21,12 +22,21 @@ def isEmpty(elev=Elevators):#check if the elev. have no calls
             return True
 
 def doneCall(myBuild=Building, call=Calls):
-    for q in myBuild.elvators:
-        if len(q.elevCalls) > 0:
-            for busy in q.elevCalls:
+    for i in myBuild.elvators:
+        if len(i.elevCalls) > 0:
+            for busy in i.elevCalls:
                 if busy < float(call.time):
-                    q.elevCalls.pop(q.elevCalls.index(busy))
+                    i.elevCalls.pop(i.elevCalls.index(busy))
 
+def sortEmpty(emptyElevs=Elevators,call=Calls):
+    ElevId=-1
+    min = 11111111111111
+    for i in range (len(emptyElevs)):
+          temp = playTime(emptyElevs[i], call)
+          if temp < min:
+            min = temp
+            ElevId = i
+    return ElevId
 
 def allocate(myBuild=Building, call=Calls):
     ElevId = -1
@@ -34,37 +44,42 @@ def allocate(myBuild=Building, call=Calls):
     doneCall(myBuild, call)#erase calls that done until this new one appeared
 
     for i in range(len(myBuild.elvators)):
-        if isEmpty(myBuild.elvators[i]):#if there's no calls, sort and return the best enpty elev. for this call
-            temp = playTime(myBuild.elvators[i],call)
-            if temp<min:
-                min=temp
-                ElevId=i
-            myBuild.elvators[ElevId].elevCalls.append(playTime(myBuild.elvators[ElevId], call) + float(call.time))
-            call.elev_id = ElevId
-            return ElevId
 
-    else:
-      for i in range(len(myBuild.elvators)):
-            temp = abs(myBuild.elvators[i].elevCalls[-1] - float(call.time))
-            if temp < min:
+        if isEmpty(myBuild.elvators[i]):  #if there's no calls, sort and return the best enpty elev. for this call
+            emptyElevs = []
+            emptyElevs.append(myBuild.elvators[i])
+
+        else:
+            for i in range(len(myBuild.elvators)):
+              temp = abs(myBuild.elvators[i].elevCalls[-1] - float(call.time))
+              if temp < min:
                 min = temp
                 ElevId = i
             call.elv_id = ElevId
             myBuild.elvators[ElevId].elevCalls.append(playTime(myBuild.elvators[ElevId], call) + float(call.time))#push new call to choosen elev. list
-            return ElevId
+
+
+            if len(emptyElevs)>0:
+                ElevId = sortEmpty()
+                myBuild.elvators[ElevId].elevCalls.append(playTime(myBuild.elvators[ElevId], call) + float(call.time))
+                call.elev_id = ElevId
+                return ElevId
+            else:
+                return ElevId
+
 
 
 def output(file_build, file_calls, file_update_calls):
     myBuild = Building(0, 0)
     myBuild.load_json_build(file_build)
     list_calls = load_csv_calls(file_calls)
-    update_calls = []
+    newCalls = []
     for i in list_calls:
         allocate(myBuild, i)
-        update_calls.append(i.__dict__.values())
+        newCalls.append(i.__dict__.values())
     with open(file_update_calls, 'w', newline="") as f:
         csw = csv.writer(f)
-        csw.writerows(update_calls)
+        csw.writerows(newCalls)
     return file_update_calls
 
-output("B1.json", "Calls_a.csv", "output.csv")
+output("B5.json", "Calls_d.csv", "output.csv")
