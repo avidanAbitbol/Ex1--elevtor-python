@@ -1,3 +1,5 @@
+![9LiX](https://user-images.githubusercontent.com/80645472/142637480-766417ad-597a-450a-b656-4405ddd78457.gif)
+
 # smart elevator problem & solotuion
 
 ELEVATORS PROBLEM AND SMART ALGORHITM-
@@ -7,34 +9,34 @@ some soloution are trying to calibrate elevtors to smart by design an algorithm,
 to read more about the problem:
 
 # some Literature Review about smart elevators.
-# first article-
+ First article-
 
 this an article about the transition from old to smart elevators, moreover on the technology changes that allow and continue the progress of streamlining to waiting time of elevators passengers:  
 https://www.popularmechanics.com/technology/infrastructure/a20986/the-hidden-
  /science-of-elevators
  
-# seconde article-
+ Seconde article-
 
 this article is about the same problem but with just one elevator in the building and how it works. 
 https://elevation.fandom.com/wiki/Elevator_algorithm
 
-# third article-
+ Third article-
 
 an article that suggest a solotuion by  an mathematics-algorhitm by doing simple calculations and some condition to design a better algorithm for get the elevators to the destination by the "best" time. 
 /https://austingwalters.com/everyday-algorithms-elevator-allocation
 
-# fourth article-
+ Fourth article-
 
 trying to solve the problem by finding the best position of the elveator beetween calls: 
 https://idogreenberg.neocities.org/linked%20files/Articles/Elevators%20weighting%20time
 %20optimization.pdf
 
-# fifth article-
+ Fifth article-
 
 an article that suggest to solve this problem by an AI algorithm that make decisions to stop by an database of the building that present the busiest hours and the common floor that are used, and by this information deceided where to go and stop. 
 https://www.cs.huji.ac.il/~ai/projects/2014/The_intelevator/files/report.pdf
 
-# Smart elevator algorithm-pseudo code:
+# Smart elevator algorithm:
 
 We designed an online inputs algorithm in our first project ,to do that we get a call online an allocate the best elevator to embed this call to.
 Now we have all the calls from the beginning , so we will allocate the best elevator and embed it to the calls before the elevator will start to run.
