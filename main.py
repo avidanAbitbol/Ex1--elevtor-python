@@ -46,6 +46,7 @@ def allocate(myBuild=Building, call=Calls):
     min = 11111111111111
     # erase calls that done until this new one appeared
     doneCall(myBuild, call)
+
     for i in range(len(myBuild.elvators)):
         # if there's no calls, sort and return the best empty elev. for this call
         if isEmpty(myBuild.elvators[i]):
@@ -54,7 +55,6 @@ def allocate(myBuild=Building, call=Calls):
                 min = time
                 ElevId = i
         call.elev_id = ElevId
-        myBuild.elvators[ElevId].elevCalls.append(playTime(myBuild.elvators[ElevId], call) + float(call.time))
     else:
         temp = abs(myBuild.elvators[i].elevCalls[-1] - float(call.time))
         if temp < min:
@@ -63,6 +63,7 @@ def allocate(myBuild=Building, call=Calls):
         call.elv_id = ElevId
         # push new call to chosen elev. list
         myBuild.elvators[ElevId].elevCalls.append(playTime(myBuild.elvators[ElevId], call) + float(call.time))
+
         return ElevId
 
 
