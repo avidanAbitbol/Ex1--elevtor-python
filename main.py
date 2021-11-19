@@ -1,67 +1,65 @@
-import csv
-from Elevators import Elevators
-from Building import Building
-from Calls import Calls, loadCalls
+from Building import *
+from Elevator import *
+from Calls import *
 
+def playTime(elv=Elevator, call=Calls):
+    playTime = float(elv.open_time) + float(elv.close_time) + float(elv.start_time) + (
+                abs(float(call.src_floor) - float(call.dst_floor)) / float(elv.speed)) + float(elv.stop_time) + float(
+        elv.open_time) + float(elv.close_time)
+    return playTime
 
-# time for each call(according to elevator param)
-def playTime(elv=Elevators, call=Calls):
-    time = float(elv.open_time) + float(elv.close_time) + float(elv.start_time) + (
-            abs(float(call.src_floor) - float(call.dst_floor)) / float(elv.speed)) \
-               + float(elv.stop_time) + float(elv.open_time) + float(elv.close_time)
-    return time
+def emptySort(building=Building, call=Calls):#sort all empty elevators
+    elev = building.elvators
+    elevId = -1
+    min = 999999999999
+    for i in range(len(elev)):
+        if len(elev[i].elevCalls) <= 0:
+            time = playTime(elev[i], call)
+            if time < min:
+                min = time
+                elevId = i
+    return elevId
 
-
-# remove from the list calls that are done by time.
-def doneCall(myBuild=Building, call=Calls):
-    for i in myBuild.elvators:
+def doneCall(bui=Building, call=Calls):
+    for i in bui.elvators:
         if len(i.elevCalls) > 0:
             for j in i.elevCalls:
                 if j < float(call.time):
                     i.elevCalls.pop(i.elevCalls.index(j))
 
+def getAlocate(build=Building, call=Calls):
+    Elevs = len(build.elvators)
+    ElevId = -1
+    min = 99999999
+    doneCall(build, call)#erase "done calls"(calls that done before current call time) from all elevators.
+    emptyBest = emptySort(build, call)
+    if emptyBest != -1:  #if empty elevatrors exist, check the better one
+        call.elv_id = emptyBest
+        build.elvators[emptyBest].elevCalls.append(playTime(build.elvators[emptyBest], call) + float(call.time) + 0)
+        return emptyBest
 
-# function to allocate the best elevator to this call
-def get_allocate(myBuild=Building, call=Calls):
-    bestFree = -1
-    bestBusy = -1
-    minFree = 11111111111111
-    minBusy = 11111111111111
-    doneCall(myBuild, call)  # erase calls that done until this new one appeared
-
-    for i in range(len(myBuild.elvators)):  # passes over all elevators in this building
-        if len(myBuild.elvators[i].elevCalls) <= 0:  # means that this elevator don't have calls
-            time = playTime(myBuild.elvators[i], call)
-            if (time <= minFree):
-                minFree = time
-                bestFree = i
-        else:  #
-            time = abs(myBuild.elvators[i].elevCalls[-1] - float(call.time))
-            if (time <= minBusy):
-                minBusy = time
-                bestBusy = i
-
-    if (bestFree != -1):
-        myBuild.elvators[bestFree].elevCalls.append(playTime(myBuild.elvators[bestFree], call) + float(call.time))
-        return bestFree
     else:
-        myBuild.elvators[bestBusy].elevCalls.append(playTime(myBuild.elvators[bestBusy], call) + float(call.time))
-        return bestBusy
-
+        for i in range(Elevs):#if there is no empty, looks for the better one (best time between finish last to new one)
+            time = abs(build.elvators[i].elevCalls[-1] - float(call.time) + playTime(build.elvators[i], call))
+            if time < min:
+                min = time
+                ElevId = i
+        call.elv_id = ElevId
+        build.elvators[ElevId].elevCalls.append(playTime(build.elvators[ElevId], call) + float(call.time) + min)
+    return ElevId
 
 def output(file_build, file_calls, file_update_calls):
-    b = Building(0, 0)
-    b.load_json_build(file_build)
-    list_calls = loadCalls(file_calls)
-    newCalls = []
-    for i in list_calls:
-        get_allocate(b, i)
-        newCalls.append(i.__dict__.values())
+    MyBuilding = Building(0, 0)
+    MyBuilding.BuildFromJason(file_build)
+    list_calls = CallsFromCsv(file_calls)
+    CallsList = []
+    for call in list_calls:
+        getAlocate(MyBuilding, call)
+        CallsList.append(call.__dict__.values())
     with open(file_update_calls, 'w', newline="") as f:
         csw = csv.writer(f)
-        csw.writerows(newCalls)
+        csw.writerows(CallsList)
     return file_update_calls
 
 
-output("B1.json", "Calls_d.csv", "output.csv")
-
+output("B3.json", "Calls_a.csv", "output.csv")
