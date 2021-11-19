@@ -2,8 +2,8 @@
 
 ELEVATORS PROBLEM AND SMART ALGORHITM-
 
-in old elevators there is no algorhitm to direct the route of the elevator to the passengers calls, to do it in an efficient way,
-some soloution are trying to calibrate elevtors to smart by design an algorithm, this project build a smart algorhitm to elevator for an offline inputs.
+in old elevators there is no algorhitm to direct the route of the elevator to the passengers calls it is working on some forms, to do it in an efficient way,
+some soloution are trying to calibrate elevtors to smart by design an algorithm, this project build a smart algorhitm to elevator for an offline inputs to deacreae waiting time of elevators passengers.
 to read more about the problem:
 
 # some Literature Review about smart elevators.
