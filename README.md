@@ -38,7 +38,8 @@ https://idogreenberg.neocities.org/linked%20files/Articles/Elevators%20weighting
 an article that suggest to solve this problem by an AI algorithm that make decisions to stop by an database of the building that present the busiest hours and the common floor that are used, and by this information deceided where to go and stop. 
 https://www.cs.huji.ac.il/~ai/projects/2014/The_intelevator/files/report.pdf
 
-![9LiX](https://user-images.githubusercontent.com/80645472/142638184-bf89f0ab-0fd2-4af0-b799-b9333e0a267b.gif)
+
+![Cwgf](https://user-images.githubusercontent.com/80645472/142638350-9f5199fb-5807-476f-ae79-34b066db7fdd.gif)
 
 # Smart elevator algorithm:
 
