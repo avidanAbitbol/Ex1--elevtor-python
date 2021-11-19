@@ -1,27 +1,24 @@
-from Calls import *
+import csv
 from Elevators import Elevators
 from building import Building
 from Calls import load_csv_calls, Calls
 
 
-def playTime(elv=Elevators, call=Calls):  # time for each call(according to elevator param)
-    speed = float(elv.speed)
-    open = float(elv.open_time)
-    close = float(elv.close_time)
-    start = float(elv.start_time)
-    stop = float(elv.stop_time)
-    src = int(call.src_floor)
-    dst = int(call.dst_floor)
-    playTime = open + close + start + (abs(src - dst) / speed) + stop + open + close
+# time for each call(according to elevator param)
+def playTime(elv=Elevators, call=Calls):
+    playTime = float(elv.open_time) + float(elv.close_time) + float(elv.start_time) + (
+                abs(float(call.src_floor) - float(call.dst_floor)) / float(elv.speed)) + float(elv.stop_time) + float(
+        elv.open_time) + float(elv.close_time)
     return playTime
 
 
-# check if the elev. have no calls
+# check if the elevator have no calls
 def isEmpty(elev=Elevators):
     if len(elev.elevCalls) <= 0:
         return True
 
 
+# remove from the list calls that are done by time.
 def doneCall(myBuild=Building, call=Calls):
     for i in myBuild.elvators:
         if len(i.elevCalls) > 0:
@@ -30,6 +27,7 @@ def doneCall(myBuild=Building, call=Calls):
                     i.elevCalls.pop(i.elevCalls.index(busy))
 
 
+# sorting the free elevators to check the best time.
 def sortEmpty(emptyElevs=Elevators, call=Calls):
     ElevId = -1
     min = 11111111111111
@@ -41,7 +39,8 @@ def sortEmpty(emptyElevs=Elevators, call=Calls):
     return ElevId
 
 
-def allocate(myBuild=Building, call=Calls):
+# function to allocate the best elevator to this call
+def get_allocate(myBuild=Building, call=Calls):
     ElevId = -1
     min = 11111111111111
     # erase calls that done until this new one appeared
@@ -73,7 +72,7 @@ def output(file_build, file_calls, file_update_calls):
     list_calls = load_csv_calls(file_calls)
     newCalls = []
     for i in list_calls:
-        allocate(myBuild, i)
+        get_allocate(myBuild, i)
         newCalls.append(i.__dict__.values())
     with open(file_update_calls, 'w', newline="") as f:
         csw = csv.writer(f)
