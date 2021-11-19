@@ -8,6 +8,8 @@ in old elevators there is no algorhitm to direct the route of the elevator to th
 some soloution are trying to calibrate elevtors to smart by design an algorithm, this project build a smart algorhitm to elevator for an offline inputs to deacreae waiting time of elevators passengers.
 to read more about the problem:
 
+![XHXn](https://user-images.githubusercontent.com/80645472/142638164-5e56d2d2-e125-400c-abc6-d7053036dee6.gif)
+
 # some Literature Review about smart elevators.
  First article-
 
@@ -35,6 +37,8 @@ https://idogreenberg.neocities.org/linked%20files/Articles/Elevators%20weighting
 
 an article that suggest to solve this problem by an AI algorithm that make decisions to stop by an database of the building that present the busiest hours and the common floor that are used, and by this information deceided where to go and stop. 
 https://www.cs.huji.ac.il/~ai/projects/2014/The_intelevator/files/report.pdf
+
+![9LiX](https://user-images.githubusercontent.com/80645472/142638184-bf89f0ab-0fd2-4af0-b799-b9333e0a267b.gif)
 
 # Smart elevator algorithm:
 
