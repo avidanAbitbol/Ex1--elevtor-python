@@ -1,5 +1,4 @@
 import csv
-import pandas as pd
 
 
 def load_csv_calls(file):
@@ -8,7 +7,7 @@ def load_csv_calls(file):
         calls_data = csv.reader(f)
         for row in calls_data:
             call = Calls(call_num=row[0], time=row[1], src_floor=row[2]
-                          , dst_floor=row[3], state=row[4], elev_id=row[5])
+                         , dst_floor=row[3], state=row[4], elev_id=row[5])
             calls_list.append(call)
     return calls_list
 
