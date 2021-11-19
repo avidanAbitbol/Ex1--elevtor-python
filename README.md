@@ -27,7 +27,7 @@ fifth article-
 an article that suggest to solve this problem by an AI algorithm that make decisions to stop by an database of the building that present the busiest hours and the common floor that are used, and by this information deceided where to go and stop. 
 https://www.cs.huji.ac.il/~ai/projects/2014/The_intelevator/files/report.pdf
 
-# Smart elevator algorithm-pseudo code in this project:
+# Smart elevator algorithm-pseudo code:
 
 We designed an online inputs algorithm in our first project ,to do that we get a call online an allocate the best elevator to embed this call to.
 Now we have all the calls from the beginning , so we will allocate the best elevator and embed it to the calls before the elevator will start to run.
