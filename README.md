@@ -36,5 +36,10 @@ To start , we will check if there free elevators to get the call, from the free 
 If there is no free elevator we will calculate the time of the elevators to done the last call and to do the current call and choose the elevator with the best time.
 With those conditions and calculate we will allocate the best elevator to each call, we will use the inputs file to do it before running the elevator.
 
+UML for this project:
+
+
+
+
 ![Screenshot 2021-11-19 102247](https://user-images.githubusercontent.com/80645472/142592701-43d52ed5-7342-4f8b-aaf9-01bb4e8f5156.png)
 
