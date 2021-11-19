@@ -1,4 +1,5 @@
-# Ex1
+# smart elevator problem & solotuion
+
 ELEVATORS PROBLEM AND SMART ALGORHITM-
 
 in old elevators there is no algorhitm to direct the route of the elevator to the passengers calls, to do it in an efficient way,
